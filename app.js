@@ -55,10 +55,10 @@ wowApp.movieClick = ()=>{
 
     // Save the innerText of the option clicked to a property in the namespace object
     wowApp.userChoice=e.target.innerText;
-    if(wowApp.userChoice==="Choose a movie")
-    {
-        alert("I thought you wanted to hear a wow?")
-    }
+    // if(wowApp.userChoice==="Choose a movie")
+    // {
+    //     alert("I thought you wanted to hear a wow?")
+    // }
 
     // Call the getWows function, passing the wowApp.userChoice property as an argument
     wowApp.getWows(wowApp.userChoice);
@@ -80,17 +80,45 @@ wowApp.getWows = movieWow=>{
         }   
     })
 
-    .then ((wowData)=>{
-      console.log(wowData);
-      console.log(movieWow);
-    })
+        .then((wowData) => {
+            console.log(wowData);
+            console.log(movieWow);
+            wowApp.createCard(wowData);
+        })
 
-    .catch((error)=>{
-        // Alert user with error message if data does not exist
-        alert(error);
-    })
- 
-   
+        .catch((error) => {
+            // Alert user with error message if data does not exist
+            alert(error);
+        })
+
+
+}
+
+//A function declaration to create card elements populate the list
+wowApp.createCard =(wowData)=> {
+    const firstOption = document.querySelector('#firstOption')
+    console.log("this is first option", firstOption);
+
+
+    const videoSource = wowData[0].video["1080p"];
+    console.log("this is a video source", videoSource);
+
+    // Query select the card container to later display the info
+    const movieCard = document.querySelector('.movieDropdownContainer');
+
+    // Create movie element within the main card container
+    wowApp.generatedVideo = document.createElement('video');
+    wowApp.generateSource = document.createElement('source');
+
+    // Set the attributes to make the video and controlls appear
+    wowApp.generateSource.setAttribute('src', videoSource);
+    wowApp.generatedVideo.setAttribute('controls', 'controls')
+
+    //Append working source to video, then video to the movie card
+    wowApp.generatedVideo.append(wowApp.generateSource);
+    movieCard.append(wowApp.generatedVideo);
+    console.log(wowApp.generateSource);
+
 }
 
 // Call the init method
