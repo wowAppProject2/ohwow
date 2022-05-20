@@ -1,0 +1,15 @@
+video {
+    width: 250px;
+    height: 250px;
+}
+
+.cardListContainer {
+    display: flex;
+    flex-direction: row;
+    .cardTextContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 25px;
+    }
+}

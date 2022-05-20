@@ -9,12 +9,60 @@ html {
   margin: 0 auto;
 }
 
+.skip-link {
+  position: absolute;
+  left: -1000px;
+  top: 5px;
+  z-index: 999;
+  background: white;
+  color: black;
+}
+
+.skip-link:focus {
+  left: 0;
+}
+
 img {
   display: inline-block;
+  height: 250px;
+  width: 250px;
 }
 
 ul {
   padding: 0;
   margin: 0;
   list-style: none;
+}
+
+video {
+  width: 200px;
+  height: 200px;
+}
+
+video {
+  width: 250px;
+  height: 250px;
+}
+
+.cardListContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+.cardListContainer .cardTextContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-left: 25px;
 }
