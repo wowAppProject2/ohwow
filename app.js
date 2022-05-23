@@ -1,6 +1,11 @@
 // Create a namespace object for our app
 const wowApp={};
 
+//Namespace the api info for the movieDB api
+wowApp.apiKey = `7643abd5961e73d66a384e1b206bf3ec`;
+
+wowApp.endPoint = `https://api.themoviedb.org/3/search/movie?`;
+
 // define an init method to:  
 wowApp.init=()=>{
     // call a method that will populate dropwon Menu
@@ -83,6 +88,7 @@ wowApp.getWows = movieWow=>{
     })
           
     .then((wowData) => {
+        wowApp.moviePosterFromOwenApi = wowData[0].poster;
         wowApp.createCard(wowData);
     })
     .catch((error) => {
@@ -106,7 +112,7 @@ wowApp.createCard =(wowData)=> {
 
     // Select the main container which will flex each video and text container
     // NOTE: RENAME CONTAINER
-    const wowText=document.querySelector('.cardTextContainer');
+    wowApp.wowText=document.querySelector('.cardTextContainer');
 
     // Create wow#, timestamp and full quote elements
     const wowNumber = document.createElement('p');
@@ -143,9 +149,80 @@ wowApp.createCard =(wowData)=> {
     videoAndTextContainer.append(wowApp.generatedVideo,singleCardContainer);
 
     // Append the videoAndTextContainer to the MAIN CONTAINER (update name when class is changed)
-    wowText.append(videoAndTextContainer);
+    wowApp.wowText.append(videoAndTextContainer);
+
+    //Running function to populate poster, rating, title, and description
+    wowApp.getRating(wowApp.userChoice);
 
 }
-          
+
+//Pass movie choice to constructor, constructor finds the movie object
+wowApp.getRating = (movieChoice) => {
+    const urlObject = new URL(wowApp.endPoint)
+    
+    urlObject.search = new URLSearchParams({
+        api_key:wowApp.apiKey,
+        query:movieChoice
+    });
+    
+    fetch(urlObject)
+    .then( (response) => {
+        console.log(response);
+        return response.json();
+    })
+    .then( (jsonData) => {
+        console.log(jsonData);
+
+        //Filter array by movie title to find the right title get back movie
+
+        wowApp.movieReturned = jsonData.results.filter( function(title) {
+            return title.title == movieChoice
+        });
+        console.log(wowApp.movieReturned[0].overview)
+        wowApp.movieHeader();
+    });
+}
+
+
+// Use array # to pull title, poster, rating, and description
+
+wowApp.movieHeader = (movieArray) => {
+// Create main container to hold all movie info
+const movieHeaderContainer=document.createElement('div');
+movieHeaderContainer.classList.add('movieHeaderContainer');
+
+
+
+
+const videoAndTextContainer=document.createElement('div');
+videoAndTextContainer.classList.add('videoTextContainer')
+
+
+//Create div to hold movie poster
+const moviePosterContainer=document.createElement('div');
+moviePosterContainer.classList.add('moviePosterContainer');
+
+// //Create div to hold movie info text
+// const movieTextContainer = document.createElement('div');
+// movieTextContainer = document.classList.add('movieTextContainer');
+
+//Add poster img to moviePosterContainer
+const moviePoster = document.createElement('img');
+console.log('this one here', wowApp.movieReturned[0]);
+
+
+moviePoster.src = wowApp.moviePosterFromOwenApi;
+moviePoster.alt = `Poster of ${wowApp.movieReturned[0].title}`;
+
+moviePoster.setAttribute('src', moviePoster.src);
+moviePoster.setAttribute('alt', moviePoster.alt);
+
+movieHeaderContainer.append(moviePosterContainer);
+moviePosterContainer.append(moviePoster);
+wowApp.wowText.append(movieHeaderContainer);
+}
+
+
+
 // Call the init method
 wowApp.init(); 
