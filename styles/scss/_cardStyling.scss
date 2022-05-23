@@ -18,3 +18,13 @@
     .videoTextContainer{
         display:flex;
     }
+
+    .movieHeaderContainer{
+        display:flex;
+        flex-direction:row-reverse;
+    }
+
+    .movieTextContainer{
+        display:flex;
+        flex-direction:column;
+    }

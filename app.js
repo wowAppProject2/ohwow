@@ -12,8 +12,36 @@ wowApp.init=()=>{
     wowApp.populateDropDown(); 
     // call a method that will add an event listener to our form element
     wowApp.movieClick();
-    // QuerySelect the form element
+    // Add event listener to watch list
+    wowApp.toggleMovieList();
+      // QuerySelect the form element
     wowApp.formSelect=document.querySelector('form');
+}
+
+// Open and close the wish list menu
+wowApp.toggleMovieList=()=>{
+
+    let toggleListStatus = true;
+    const toggleListButton=document.querySelector('.watchListButton');
+    toggleListButton.addEventListener('click', ()=>{
+    const myWatchList=document.querySelector('.myWatchList')
+        
+        if(toggleListStatus===false){
+            myWatchList.style.width = "0";
+            myWatchList.style.height = "0";
+            toggleListStatus = true;
+        }
+
+        else{
+            myWatchList.style.width = "100vw";
+            myWatchList.style.height = "100vw";
+            myWatchList.style.transition = ".3s ease-in";
+            toggleListStatus = false;
+        }
+
+    })
+
+
 }
           
 // Method that populates the dropdown menu with API call
@@ -62,10 +90,7 @@ wowApp.movieClick = ()=>{
     wowApp.userChoice=e.target.value;
     console.log(wowApp.userChoice);
 
-              // if(wowApp.userChoice==="Choose a movie")
-              // {
-              //     alert("I thought you wanted to hear a wow?")
-              // }
+       
           
     // Call the getWows function, passing the wowApp.userChoice property as an argument
     wowApp.getWows(wowApp.userChoice);
@@ -186,25 +211,49 @@ wowApp.getRating = (movieChoice) => {
 
 // Use array # to pull title, poster, rating, and description
 
-wowApp.movieHeader = (movieArray) => {
+wowApp.movieHeader = () => {
+
 // Create main container to hold all movie info
 const movieHeaderContainer=document.createElement('div');
 movieHeaderContainer.classList.add('movieHeaderContainer');
 
+const removeMovieHeader=document.querySelector('.movieHeaderContainer');
 
-
-
-const videoAndTextContainer=document.createElement('div');
-videoAndTextContainer.classList.add('videoTextContainer')
+// Once a new movie selected =, remove movie poster and text from previous choice
+if(removeMovieHeader!==null){
+    removeMovieHeader.remove();
+}
 
 
 //Create div to hold movie poster
 const moviePosterContainer=document.createElement('div');
 moviePosterContainer.classList.add('moviePosterContainer');
 
-// //Create div to hold movie info text
-// const movieTextContainer = document.createElement('div');
-// movieTextContainer = document.classList.add('movieTextContainer');
+//Create div to hold movie info text
+const movieTextContainer = document.createElement('div');
+movieTextContainer.classList.add('movieTextContainer');
+
+// Create lements for movie description, title and rating
+let movieTitle = document.createElement('p');
+let movieDescription = document.createElement('p');
+let movieRating = document.createElement('p');
+wowApp.watchListButton = document.createElement('button');
+wowApp.watchListButton.classList.add('addMovieToList');
+
+// Set elements to respective object properties
+
+movieTitle.textContent = wowApp.movieReturned[0].title;
+movieDescription.textContent= wowApp.movieReturned[0].overview;
+movieRating.textContent=wowApp.movieReturned[0].vote_average;
+wowApp.watchListButton.textContent="Add to watch list";
+
+
+// Append text elements to movieHeaderTextContainer
+movieTextContainer.append(movieTitle, movieDescription, movieRating, wowApp.watchListButton);
+
+// Append moviePosterContainer and movieTextHeaderContainer to movieHeaderContainer
+movieHeaderContainer.append(movieTextContainer);
+
 
 //Add poster img to moviePosterContainer
 const moviePoster = document.createElement('img');
@@ -220,6 +269,34 @@ moviePoster.setAttribute('alt', moviePoster.alt);
 movieHeaderContainer.append(moviePosterContainer);
 moviePosterContainer.append(moviePoster);
 wowApp.wowText.append(movieHeaderContainer);
+
+wowApp.addMovie();
+}
+
+wowApp.addMovie=()=>{
+    // Select the UL from myWatchList
+    const myWatchList = document.querySelector('.myWatchList');
+    // Add event listener to watch list button
+    wowApp.watchListButton.addEventListener('click', ()=>{
+        // Create li and image and paragraph element 
+        const listItem = document.createElement('li');
+        const posterImage = document.createElement('img');
+        const posterTitle = document.createElement('h2');
+
+         // Set image attributes to poster path and title to h2
+         posterImage.src = wowApp.moviePosterFromOwenApi;
+         posterImage.alt=`Poster of ${wowApp.userChoice}`;
+         posterTitle.textContent=wowApp.userChoice;
+         posterImage.setAttribute('src', posterImage.src);
+         posterImage.setAttribute('alt', posterImage.alt);
+
+        // Append image to li
+        listItem.append(posterTitle,posterImage);
+
+        myWatchList.append(listItem);
+
+    })
+    
 }
 
 
