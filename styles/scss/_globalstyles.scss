@@ -4,6 +4,10 @@ html {
     box-sizing: border-box;
 }
 
+main {
+    min-height: 100vh;
+}
+
 .wrapper {
     max-width: 1600px;
     width: 90%;

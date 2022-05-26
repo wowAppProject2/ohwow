@@ -1,8 +1,13 @@
 .myWatchList{
-   background-color:red;
+    position: absolute;
+   background-color:rgb(156, 176, 246);
+   height: 0;
    width:0;
    overflow:hidden;
    li{
-       width:10%;
+       width:20%;
+   }
+   button {
+       width: 100%;
    }
 }

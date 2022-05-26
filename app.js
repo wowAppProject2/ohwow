@@ -34,7 +34,7 @@ wowApp.toggleMovieList=()=>{
 
         else{
             myWatchList.style.width = "100vw";
-            myWatchList.style.height = "100vw";
+            myWatchList.style.height = "auto";
             myWatchList.style.transition = ".3s ease-in";
             toggleListStatus = false;
         }
@@ -88,7 +88,6 @@ wowApp.movieClick = ()=>{
       
     // Save the innerText of the option clicked to a property in the namespace object
     wowApp.userChoice=e.target.value;
-    console.log(wowApp.userChoice);
 
        
           
@@ -163,6 +162,7 @@ wowApp.createCard =(wowData)=> {
     // Set the attributes to make the video and controls appear
     wowApp.generateSource.setAttribute('src', videoSource);
     wowApp.generatedVideo.setAttribute('controls', 'controls');
+    wowApp.generatedVideo.setAttribute('autoplay', 'autoplay');
           
     //Append working source to video
     wowApp.generatedVideo.append(wowApp.generateSource);
@@ -203,7 +203,6 @@ wowApp.getRating = (movieChoice) => {
         wowApp.movieReturned = jsonData.results.filter( function(title) {
             return title.title == movieChoice
         });
-        console.log(wowApp.movieReturned[0].overview)
         wowApp.movieHeader();
     });
 }
@@ -257,7 +256,6 @@ movieHeaderContainer.append(movieTextContainer);
 
 //Add poster img to moviePosterContainer
 const moviePoster = document.createElement('img');
-console.log('this one here', wowApp.movieReturned[0]);
 
 
 moviePoster.src = wowApp.moviePosterFromOwenApi;
@@ -273,33 +271,63 @@ wowApp.wowText.append(movieHeaderContainer);
 wowApp.addMovie();
 }
 
+// Adds movie poster and removal button to the watch list
 wowApp.addMovie=()=>{
     // Select the UL from myWatchList
     const myWatchList = document.querySelector('.myWatchList');
     // Add event listener to watch list button
     wowApp.watchListButton.addEventListener('click', ()=>{
         // Create li and image and paragraph element 
-        const listItem = document.createElement('li');
-        const posterImage = document.createElement('img');
-        const posterTitle = document.createElement('h2');
+        //use randomNumber generator to generate id, save the id to variable
+        let randomNumber = Math.floor(Math.random() *10000)
+        wowApp.listItem = document.createElement('li');
+        wowApp.listItem.classList.add('listItem');
+        wowApp.listItem.setAttribute('id', randomNumber)
 
-         // Set image attributes to poster path and title to h2
+
+
+        const posterImage = document.createElement('img');
+        wowApp.listRemoveButton = document.createElement('button');
+        wowApp.listRemoveButton.classList.add('removeMovieFromList');
+
+         // Set image attributes to poster path and title to button
          posterImage.src = wowApp.moviePosterFromOwenApi;
          posterImage.alt=`Poster of ${wowApp.userChoice}`;
-         posterTitle.textContent=wowApp.userChoice;
+         wowApp.listRemoveButton.textContent = "Remove from this list"
+
          posterImage.setAttribute('src', posterImage.src);
          posterImage.setAttribute('alt', posterImage.alt);
 
         // Append image to li
-        listItem.append(posterTitle,posterImage);
+        wowApp.listItem.append(posterImage, wowApp.listRemoveButton);
 
-        myWatchList.append(listItem);
+        myWatchList.append(wowApp.listItem);
+        wowApp.removeMovie();
 
     })
     
 }
 
 
+// Removes a movie from watch list when its button is clicked
+wowApp.removeMovie = () => {
+
+// Query for all generated buttons
+    wowApp.removeMovieButton = document.querySelectorAll('.removeMovieFromList');
+
+// For each button open its node list too target the ID
+    wowApp.removeMovieButton.forEach(item => {
+        item.addEventListener('click', function(e) {
+            const parentID = e.target.parentNode.id
+            wowApp.deleteListItem = document.getElementById(parentID);
+
+// As long as the list isn't empty delete the list item
+            if(wowApp.deleteListItem !==null){
+                wowApp.deleteListItem.remove();
+            }
+    })
+})
+}
 
 // Call the init method
 wowApp.init(); 
