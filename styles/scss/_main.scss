@@ -1,0 +1,16 @@
+main {
+    min-height: 100vh;
+    .movieDropdownContainer{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        select {
+            padding: 5px;
+            background-color: $primaryBlack;
+            color: white;
+            border: 3px solid $primaryYellow;
+            border-radius: 5px;
+        }
+    }
+}

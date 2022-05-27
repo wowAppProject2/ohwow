@@ -16,6 +16,21 @@ wowApp.init=()=>{
     wowApp.toggleMovieList();
       // QuerySelect the form element
     wowApp.formSelect=document.querySelector('form');
+    //call a method to play the hover wow sound
+    wowApp.hoverSound();
+}
+
+wowApp.hoverSound = () => {
+    const audio = new Audio("./assets/wowHoverSound.mp3")
+    const audioElement = document.querySelector('audio');
+    const mouthImg = document.querySelector('.mouthImgContainer');
+
+    mouthImg.addEventListener('click', (audioElement)=> {
+        audio.play();
+
+        mouthImg.style.width= "260px";
+        mouthImg.style.transition= "width 0.6s ease-in";
+    })
 }
 
 // Open and close the wish list menu
@@ -29,11 +44,15 @@ wowApp.toggleMovieList=()=>{
         if(toggleListStatus===false){
             myWatchList.style.width = "0";
             myWatchList.style.height = "0";
+            myWatchList.style.border = "none";
+            myWatchList.style.transition = ".3s ease-in";
             toggleListStatus = true;
         }
 
         else{
-            myWatchList.style.width = "100vw";
+            myWatchList.style.width = "15vw";
+            myWatchList.style.border = "2px solid black";
+            myWatchList.style.borderLeft = "none";
             myWatchList.style.height = "auto";
             myWatchList.style.transition = ".3s ease-in";
             toggleListStatus = false;
@@ -298,7 +317,7 @@ wowApp.addMovie=()=>{
              // Set image attributes to poster path and title to button
             posterImage.src = wowApp.moviePosterFromOwenApi;
             posterImage.alt=`Poster of ${wowApp.userChoice}`;
-            wowApp.listRemoveButton.textContent = "Remove from this list"
+            wowApp.listRemoveButton.textContent = "Remove"
         
             posterImage.setAttribute('src', posterImage.src);
             posterImage.setAttribute('alt', posterImage.alt);
@@ -328,7 +347,7 @@ wowApp.addMovie=()=>{
                     // Set image attributes to poster path and title to button
                     posterImage.src = wowApp.moviePosterFromOwenApi;
                     posterImage.alt=`Poster of ${wowApp.userChoice}`;
-                    wowApp.listRemoveButton.textContent = "Remove from this list"
+                    wowApp.listRemoveButton.textContent = "Remove"
         
                     posterImage.setAttribute('src', posterImage.src);
                     posterImage.setAttribute('alt', posterImage.alt);

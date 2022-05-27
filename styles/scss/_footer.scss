@@ -1,0 +1,23 @@
+footer {
+    .blackBar {
+        background-color: $primaryBlack;
+        width: 100%;
+        text-align: center;
+    }
+    .lokiBanner {
+        background-image: url("../assets/lokiBanner.jpg");
+        height: 59vh;
+        width: 100vw;
+        background-repeat: no-repeat;
+        background-position: center bottom;
+
+    }
+    p {
+        margin: 0;
+        letter-spacing: 1px;
+        color: $primaryWhite;
+        padding: 10px 0;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+}
+
