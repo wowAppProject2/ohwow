@@ -30,6 +30,8 @@ wowApp.hoverSound = () => {
 
         mouthImg.style.width= "260px";
         mouthImg.style.transition= "width 0.6s ease-in";
+        mouthImg.style.width= "250px";
+        mouthImg.style.transition= "width 0.6s ease-in";
     })
 }
 
@@ -259,7 +261,7 @@ wowApp.watchListButton.classList.add('addMovieToList');
 
 movieTitle.textContent = wowApp.movieReturned[0].title;
 movieDescription.textContent= wowApp.movieReturned[0].overview;
-movieRating.textContent=wowApp.movieReturned[0].vote_average;
+movieRating.textContent=`${wowApp.movieReturned[0].vote_average} / 10`;
 wowApp.watchListButton.textContent="Add to watch list";
 
 
@@ -299,39 +301,49 @@ wowApp.addMovie=()=>{
     wowApp.watchListButton.addEventListener('click', ()=>{
         // Query the lists again to ensure the movie on screemn can't be added a second time, before the user changes movie selection
         wowApp.allLists=document.querySelectorAll('li');
-        // Check to see if any lists (movies have been added) to the watch list
-        if(wowApp.allLists.length===0){
-            // If the list is empty, proceed with the following code:
 
-            // Create li and image and paragraph element 
-            //use randomNumber generator to generate id, save the id to variable
-            let randomNumber = Math.floor(Math.random() *10000)
-            wowApp.listItem = document.createElement('li');
-            wowApp.listItem.classList.add('listItem');
-            wowApp.listItem.setAttribute('id', randomNumber)
+        // Convert allLists to an array
+        wowApp.allListsArr = Array.from(wowApp.allLists);
+  
+        // // Check to see if any lists (movies have been added) to the watch list
+        // if(wowApp.allLists.length===0){
+        //     // If the list is empty, proceed with the following code:
 
-            const posterImage = document.createElement('img');
-            wowApp.listRemoveButton = document.createElement('button');
-            wowApp.listRemoveButton.classList.add('removeMovieFromList');
+        //     // Create li and image and paragraph element 
+        //     //use randomNumber generator to generate id, save the id to variable
+        //     let randomNumber = Math.floor(Math.random() *10000)
+        //     wowApp.listItem = document.createElement('li');
+        //     wowApp.listItem.classList.add('listItem');
+        //     wowApp.listItem.setAttribute('id', randomNumber)
+
+        //     const posterImage = document.createElement('img');
+        //     wowApp.listRemoveButton = document.createElement('button');
+        //     wowApp.listRemoveButton.classList.add('removeMovieFromList');
         
-             // Set image attributes to poster path and title to button
-            posterImage.src = wowApp.moviePosterFromOwenApi;
-            posterImage.alt=`Poster of ${wowApp.userChoice}`;
-            wowApp.listRemoveButton.textContent = "Remove"
+        //      // Set image attributes to poster path and title to button
+        //     posterImage.src = wowApp.moviePosterFromOwenApi;
+        //     posterImage.alt=`Poster of ${wowApp.userChoice}`;
+        //     wowApp.listRemoveButton.textContent = "Remove";
         
-            posterImage.setAttribute('src', posterImage.src);
-            posterImage.setAttribute('alt', posterImage.alt);
+        //     posterImage.setAttribute('src', posterImage.src);
+        //     posterImage.setAttribute('alt', posterImage.alt);
         
-             //Append image to li
-            wowApp.listItem.append(posterImage, wowApp.listRemoveButton);
-            myWatchList.append(wowApp.listItem);    
+        //      //Append image to li
+        //     wowApp.listItem.append(posterImage, wowApp.listRemoveButton);
+        //     myWatchList.append(wowApp.listItem);    
           
-        }
+        // }
 
-        else{
-            // If list items exist, loop through the nodeList and check the users selection against the alt text of the images already in the list
-            wowApp.allLists.forEach((item)=>{
-                if(item.firstChild.alt!==`Poster of ${wowApp.userChoice}`){
+        // else{
+
+        if(wowApp.allLists.length>=0){
+            // If the wish list is popuoated, check to see if the user's cureent selection mathes the lovies already in the watch list
+           const checkMovies =  wowApp.allListsArr.filter((item)=>{
+                return item.firstChild.alt===`Poster of ${wowApp.userChoice}`;
+            });
+
+                if(checkMovies.length===0)
+                {
                     // The movie is not in the the list yet. Proceed with the foolowing code:
 
                     let randomNumber = Math.floor(Math.random() *100000)
@@ -355,30 +367,51 @@ wowApp.addMovie=()=>{
                     //Append image to li
                     wowApp.listItem.append(posterImage, wowApp.listRemoveButton);
                     myWatchList.append(wowApp.listItem); 
+
+                    // Display message when movie us Added:
+
+                    wowApp.alertDiv=document.createElement('div');
+                    // Add a id to the created div
+                    wowApp.alertDiv.setAttribute('id', 'removeDiv');
+                    // Add a class to the div
+                    wowApp.alertDiv.classList.add("messageAlert");
+                    // Add the text to be displayed in message
+                    wowApp.alertDiv.textContent="Movie Added";
+                    // Select the dropdown div, where the message will be displayed
+                    wowApp.dropdownDiv=document.querySelector('.movieDropdownContainer');
+                    // Append the created div to the dropdown div
+                    wowApp.dropdownDiv.append(wowApp.alertDiv);
+
+                    setTimeout(function () {
+                        theId = document.querySelector('#removeDiv');
+                        theId.remove();
+                    }, 2000);
                  
                 }
 
                 else{
 
-                    // Movie has already been added, alert the user
-                    const alertDiv=document.createElement('div');
-                    // Add a class to the created div
-                    alertDiv.setAttribute('id', 'removeDiv');
+                    // Movie has already been added, alert the user:
+                    wowApp.alertDiv=document.createElement('div');
+                    // Add an id to the created div
+                    wowApp.alertDiv.setAttribute('id', 'removeDiv');
+                     // Add a class to the div
+                     wowApp.alertDiv.classList.add("messageAlert");
                     // Add the text to be displayed in message
-                    alertDiv.textContent="Movie in List";
+                    wowApp.alertDiv.textContent="Movie in List";
                     // Select the dropdown div, where the message will be displayed
-                    const dropdownDiv=document.querySelector('.movieDropdownContainer');
+                    wowApp.dropdownDiv=document.querySelector('.movieDropdownContainer');
                     // Append the created div to the dropdown div
-                    dropdownDiv.append(alertDiv);
+                    wowApp.dropdownDiv.append(wowApp.alertDiv);
 
                     // Set timeout function to display div and then remove it 
                     setTimeout(function () {
                         theId = document.querySelector('#removeDiv');
                         theId.remove();
-                    }, 12000);
+                    }, 2000);
 
                 }
-            })
+            
         }  
         wowApp.removeMovie();
     })   
@@ -389,8 +422,7 @@ wowApp.removeMovie = () => {
 
 // Query for all generated buttons
     wowApp.removeMovieButton = document.querySelectorAll('.removeMovieFromList');
-    
-
+  
 // For each button open its node list too target the ID
     wowApp.removeMovieButton.forEach(item => {
         item.addEventListener('click', function(e) {

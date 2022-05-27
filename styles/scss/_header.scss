@@ -104,9 +104,9 @@ header {
     position: fixed;
     right: 20px;
     top: 60px;
-    -webkit-box-shadow: -5px -5px 5px 0px rgba(163,163,145,1);
-    -moz-box-shadow: -5px -5px 5px 0px rgba(163,163,145,1);
-    box-shadow: -5px -5px 5px 0px rgba(163,163,145,1);
+    // -webkit-box-shadow: -5px -5px 5px 0px rgba(163,163,145,1);
+    // -moz-box-shadow: -5px -5px 5px 0px rgba(163,163,145,1);
+    box-shadow:5px -5px 5px 0px rgb(163, 163, 145)
 }
 .watchListButton:hover,
 .watchListButton:focus {

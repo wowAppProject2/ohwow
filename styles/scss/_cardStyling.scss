@@ -1,38 +1,3 @@
 
-    .cardTextContainer {
-        display: flex;
-        flex-direction: column-reverse;
-        justify-content: center;
-        width:100%;
-        flex-wrap:wrap;
-        
-    }
-    .singleCardContainer{
-        width:50%;
-        display:flex;
-        flex-direction:column;
-        margin:0;
-    }
-    
-    .videoTextContainer{
-        display:flex;
-    }
-
-    .movieHeaderContainer{
-        display:flex;
-        flex-direction:row-reverse;
-        .moviePosterContainer {
-            max-width: 30%;
-            img {
-                width: 100%;
-
-            }
-        }
-        .movieTextContainer{
-            display:flex;
-            flex-direction:column;
-            width: 70%;
-        }
-    }
 
 
