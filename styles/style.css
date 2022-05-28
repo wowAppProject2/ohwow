@@ -285,7 +285,7 @@ p {
 }
 
 .heroBanner {
-  background-image: url("../assets/topHeroBanner.jpg");
+  background-image: url("../assets/topHeroBannerTextBlock.jpg");
   height: 500px;
   width: 100vw;
   background-repeat: no-repeat;
@@ -398,6 +398,7 @@ header .mouthImgContainer {
   top: 60px;
   -webkit-box-shadow: -5px -5px 5px 0px rgb(163, 163, 145);
   box-shadow: -5px -5px 5px 0px rgb(163, 163, 145);
+  z-index: 10000;
 }
 
 .watchListButton:hover,
@@ -410,7 +411,6 @@ main {
   min-height: 50vh;
 }
 main .movieDropdownContainer {
-  position: realtive;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -440,16 +440,6 @@ main .movieDropdownContainer select {
   border: 3px solid rgb(234, 213, 117);
   border-radius: 5px;
 }
-main .movieDropdownContainer .messageAlert {
-  position: absolute;
-  background-color: #65e465;
-  padding: 10px 15px;
-  right: 350px;
-  top: 339px;
-  color: white;
-  border-radius: 5px;
-  font-family: "Roboto", sans-serif;
-}
 
 .cardTextContainer {
   display: -webkit-box;
@@ -466,6 +456,13 @@ main .movieDropdownContainer .messageAlert {
   width: 100%;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+}
+.cardTextContainer h3 {
+  font-size: 2rem;
+  margin: 0 auto;
+  margin-top: 90px;
+  font-family: "Roboto", sans-serif;
+  color: #dad8d8;
 }
 
 .singleCardContainer {
@@ -501,6 +498,7 @@ main .movieDropdownContainer .messageAlert {
           box-shadow: -16px 13px 6px 0px #383838;
 }
 .movieHeaderContainer .movieTextContainer {
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -539,6 +537,19 @@ main .movieDropdownContainer .messageAlert {
   background-color: rgba(101, 228, 101, 0.8235294118);
   cursor: pointer;
 }
+.movieHeaderContainer .movieTextContainer .messageAlertAdd, .movieHeaderContainer .movieTextContainer .messageAlertRemove {
+  position: absolute;
+  background-color: #65e465;
+  padding: 10px 15px;
+  bottom: -53px;
+  left: 118px;
+  color: white;
+  border-radius: 5px;
+  font-family: "Roboto", sans-serif;
+}
+.movieHeaderContainer .movieTextContainer .messageAlertRemove {
+  background-color: #e95353;
+}
 
 .videoTextContainer {
   display: -webkit-box;
@@ -551,13 +562,13 @@ main .movieDropdownContainer .messageAlert {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  margin-top: 5%;
+  margin-top: 10px;
   margin-bottom: 30px;
   gap: 45px;
 }
 .videoTextContainer video {
-  -webkit-box-shadow: -16px 13px 6px 0px #383838;
-          box-shadow: -16px 13px 6px 0px #383838;
+  -webkit-box-shadow: -27px 24px 5px -10px #383838;
+          box-shadow: -27px 24px 5px -10px #383838;
 }
 .videoTextContainer .singleCardContainer {
   background-color: rgb(234, 213, 117);
@@ -615,4 +626,131 @@ footer a {
   color: white;
   text-decoration: none;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+@media only screen and (max-width: 990px) {
+  main .movieDropdownContainer {
+    gap: 45px;
+  }
+
+  .heroBanner {
+    background-image: url("../assets/topHeroBannerNoName.jpg");
+  }
+
+  .movieHeaderContainer {
+    -webkit-box-pack: space-evenly;
+        -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
+  }
+  .movieHeaderContainer .moviePosterContainer {
+    max-width: 45%;
+  }
+  .movieHeaderContainer .movieTextContainer {
+    width: 40%;
+  }
+
+  .videoTextContainer video {
+    width: 60%;
+  }
+}
+@media only screen and (max-width: 754px) {
+  .heroBanner {
+    background-image: url("../assets/topHeroBannerMediaQuery.jpg");
+  }
+}
+@media only screen and (max-width: 680px) {
+  header .titleContainer {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  header .titleContainer .mouthImgContainer {
+    margin-top: 10px;
+  }
+  header .titleContainer h1 {
+    margin: 0;
+  }
+
+  main {
+    min-height: 30vh;
+  }
+  main .movieDropdownContainer {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  main .movieDropdownContainer h2 {
+    margin-bottom: 0;
+  }
+
+  .movieHeaderContainer {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: column-reverse;
+            flex-direction: column-reverse;
+  }
+  .movieHeaderContainer .moviePosterContainer {
+    max-width: 100%;
+  }
+  .movieHeaderContainer .movieTextContainer {
+    width: 100%;
+  }
+
+  .videoTextContainer {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .videoTextContainer video {
+    width: 100%;
+  }
+  .videoTextContainer .singleCardContainer {
+    width: 100%;
+  }
+
+  .cardTextContainer h3 {
+    margin-top: 120px;
+  }
+
+  .movieHeaderContainer .movieTextContainer {
+    margin-top: 35px;
+  }
+  .movieHeaderContainer .movieTextContainer .messageAlertAdd, .movieHeaderContainer .movieTextContainer .messageAlertRemove {
+    left: 233px;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .cardTextContainer h3 {
+    text-align: center;
+  }
+
+  .movieHeaderContainer .movieTextContainer .messageAlertAdd, .movieHeaderContainer .movieTextContainer .messageAlertRemove {
+    left: 145px;
+  }
+
+  main .movieDropdownContainer {
+    margin-bottom: 20px;
+  }
+  main h2 {
+    text-align: center;
+  }
+  main select {
+    width: 100%;
+  }
+
+  header .titleContainer .mouthImgContainer {
+    margin-right: 250px;
+  }
+
+  .watchListButton {
+    right: 20px;
+    top: 82px;
+  }
+
+  .videoTextContainer {
+    margin-bottom: 30px;
+  }
 }

@@ -1,0 +1,139 @@
+@media only screen and (max-width:990px)
+{
+    main{
+        .movieDropdownContainer{
+            gap:45px;
+        }
+    }
+
+    .heroBanner {
+        background-image: url("../assets/topHeroBannerNoName.jpg");
+    }
+
+
+.movieHeaderContainer{
+    justify-content: space-evenly;
+    .moviePosterContainer
+    {
+        max-width:45%;
+    }
+    .movieTextContainer{
+        width:40%;
+    }
+}
+
+.videoTextContainer{
+    video{
+        width:60%;
+    }
+}
+}
+
+@media only screen and (max-width:754px){
+    .heroBanner {
+        background-image: url("../assets/topHeroBannerMediaQuery.jpg");
+    }
+}
+
+@media only screen and (max-width:680px)
+{
+    header{
+        .titleContainer{
+            .mouthImgContainer{
+                margin-top:10px;
+            }
+            flex-direction: column;
+            h1{
+                margin:0;
+            }
+        }
+    }
+    main{
+        min-height: 30vh;
+        .movieDropdownContainer{
+        flex-direction: column;
+        h2{
+            margin-bottom:0
+        }
+        }
+    }
+    .movieHeaderContainer{
+        flex-direction:column-reverse;
+        .moviePosterContainer{
+            max-width:100%;
+        } .movieTextContainer{
+            width:100%;
+        }
+        
+    }
+    .videoTextContainer{
+        flex-direction:column;
+        video{
+            width:100%;
+        }
+        .singleCardContainer{
+            width:100%;
+        }
+    }
+    .cardTextContainer{
+        h3{
+            margin-top:120px;
+        }
+    }
+    .movieHeaderContainer{
+        .movieTextContainer{
+            margin-top:35px;
+        
+            .messageAlertAdd, .messageAlertRemove{
+                left:233px;
+            }
+        }   
+    }
+}
+
+@media only screen and (max-width:480px){
+
+    .cardTextContainer{
+        h3{
+            text-align:center;
+        }
+    }
+
+    .movieHeaderContainer{
+        .movieTextContainer{
+            .messageAlertAdd, .messageAlertRemove{
+                left:145px;
+            }
+        }
+    }
+
+    main{
+        .movieDropdownContainer{
+            margin-bottom:20px;
+        }
+            h2{
+                text-align:center;
+            }
+            select{
+                width:100%;
+                
+            }
+
+        }
+    
+    header{
+        .titleContainer{
+            .mouthImgContainer{
+                margin-right:250px
+            
+            }
+        }
+    }
+    .watchListButton{
+        right:20px;
+        top:82px;
+    }
+    .videoTextContainer{
+        margin-bottom:30px;
+    }
+}

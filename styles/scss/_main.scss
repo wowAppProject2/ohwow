@@ -2,7 +2,6 @@
 main {
     min-height: 50vh;
     .movieDropdownContainer{
-        position:realtive;
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -22,16 +21,6 @@ main {
             border: 3px solid $primaryYellow;
             border-radius: 5px;
         }
-        .messageAlert{
-            position: absolute;
-            background-color: #65e465;
-            padding: 10px 15px;
-            right: 350px;
-            top: 339px;
-            color: white;
-            border-radius: 5px;
-            font-family: 'Roboto', sans-serif;
-        }
     }
 }
 
@@ -45,6 +34,14 @@ main {
     width:100%;
     flex-wrap:wrap;
     
+        h3{
+            font-size:2rem;
+            margin:0 auto;
+            margin-top:90px;
+            font-family: 'Roboto', sans-serif;
+            color: #dad8d8;
+        }
+      
 }
 .singleCardContainer{
     width:50%;
@@ -67,6 +64,7 @@ main {
         }
     }
     .movieTextContainer{
+        position: relative;
         display:flex;
         flex-direction:column;
         justify-content: space-between;
@@ -97,6 +95,19 @@ main {
             background-color:#65e465d2;
         cursor: pointer;
         }
+        .messageAlertAdd, .messageAlertRemove{
+            position: absolute;
+            background-color: #65e465;
+            padding: 10px 15px;
+            bottom: -53px;
+            left: 118px;
+            color: white;
+            border-radius: 5px;
+            font-family: 'Roboto', sans-serif;
+        }
+        .messageAlertRemove{
+            background-color:#e95353;
+        }
     }
 }
 
@@ -106,11 +117,11 @@ main {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin-top:5%;
+    margin-top:10px;
     margin-bottom: 30px;
     gap: 45px;
     video {
-        box-shadow: -16px 13px 6px 0px $primaryBlack;
+        box-shadow: -27px 24px 5px -10px $primaryBlack;
     }
     .singleCardContainer {
         background-color: $primaryYellow;

@@ -1,5 +1,5 @@
 .heroBanner {
-    background-image: url("../assets/topHeroBanner.jpg");
+    background-image: url("../assets/topHeroBannerTextBlock.jpg");
     height: 500px;
     width: 100vw;
     background-repeat: no-repeat;
@@ -103,6 +103,7 @@ header {
     -webkit-box-shadow: -5px -5px 5px 0px rgba(163,163,145,1);
     -moz-box-shadow: -5px -5px 5px 0px rgba(163,163,145,1);
     box-shadow: -5px -5px 5px 0px rgba(163,163,145,1);
+    z-index:10000;
 }
 .watchListButton:hover,
 .watchListButton:focus {

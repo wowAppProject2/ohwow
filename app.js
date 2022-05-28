@@ -50,7 +50,7 @@ wowApp.toggleMovieList=()=>{
         }
 
         else{
-            myWatchList.style.width = "15vw";
+            myWatchList.style.width = "35vw";
             myWatchList.style.border = "2px solid black";
             myWatchList.style.borderLeft = "none";
             myWatchList.style.height = "auto";
@@ -104,7 +104,13 @@ wowApp.movieClick = ()=>{
           
 // Add an event listner to the form element
     wowApp.formSelect=addEventListener('change', (e)=>{
-      
+    
+    // Select h3 message and remove from HTML
+    const grettingMessage=document.querySelector('h3');
+
+    if(grettingMessage!==null){
+    grettingMessage.remove();
+    }
     // Save the innerText of the option clicked to a property in the namespace object
     wowApp.userChoice=e.target.value;
      
@@ -395,11 +401,11 @@ wowApp.addMovie=()=>{
                     // Add a id to the created div
                     wowApp.alertDiv.setAttribute('id', 'removeDiv');
                     // Add a class to the div
-                    wowApp.alertDiv.classList.add("messageAlert");
+                    wowApp.alertDiv.classList.add("messageAlertAdd");
                     // Add the text to be displayed in message
                     wowApp.alertDiv.textContent="Movie Added";
                     // Select the dropdown div, where the message will be displayed
-                    wowApp.dropdownDiv=document.querySelector('.movieDropdownContainer');
+                    wowApp.dropdownDiv=document.querySelector('.movieTextContainer');
                     // Append the created div to the dropdown div
                     wowApp.dropdownDiv.append(wowApp.alertDiv);
 
@@ -417,19 +423,19 @@ wowApp.addMovie=()=>{
                     // Add an id to the created div
                     wowApp.alertDiv.setAttribute('id', 'removeDiv');
                      // Add a class to the div
-                     wowApp.alertDiv.classList.add("messageAlert");
+                     wowApp.alertDiv.classList.add("messageAlertRemove");
                     // Add the text to be displayed in message
                     wowApp.alertDiv.textContent="Movie in List";
                     // Select the dropdown div, where the message will be displayed
-                    wowApp.dropdownDiv=document.querySelector('.movieDropdownContainer');
+                    wowApp.dropdownDiv=document.querySelector('.movieTextContainer');
                     // Append the created div to the dropdown div
                     wowApp.dropdownDiv.append(wowApp.alertDiv);
 
-                    // Set timeout function to display div and then remove it 
-                    setTimeout(function () {
-                        theId = document.querySelector('#removeDiv');
-                        theId.remove();
-                    }, 2000);
+                    // // Set timeout function to display div and then remove it 
+                    // setTimeout(function () {
+                    //     theId = document.querySelector('#removeDiv');
+                    //     theId.remove();
+                    // }, 2000);
 
                 }
             
