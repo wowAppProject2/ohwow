@@ -1,7 +1,11 @@
 footer {
-    .blackBar {
+    .blackBarFooter {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         background-color: $primaryBlack;
         width: 100%;
+        height: 32px;
         text-align: center;
     }
     .lokiBanner {
@@ -12,11 +16,11 @@ footer {
         background-position: center bottom;
 
     }
-    p {
+    a {
         margin: 0;
         letter-spacing: 1px;
         color: $primaryWhite;
-        padding: 10px 0;
+        text-decoration: none;
         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     }
 }

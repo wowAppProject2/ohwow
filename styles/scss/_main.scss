@@ -1,5 +1,6 @@
+//DROP DOWN STYLING
 main {
-    min-height: 100vh;
+    min-height: 50vh;
     .movieDropdownContainer{
         position:realtive;
         display: flex;
@@ -7,6 +8,13 @@ main {
         align-items: center;
         justify-content: center;
         gap:250px;
+        h2 {
+            font-family: 'Lobster', cursive;
+            font-family: 'Lora', serif;
+            font-family: 'Satisfy', cursive;
+            font-size: 2rem;
+            color: $primaryBlack;
+        }
         select {
             padding: 5px;
             background-color: $primaryBlack;
@@ -22,14 +30,18 @@ main {
             top: 339px;
             color: white;
             border-radius: 5px;
+            font-family: 'Roboto', sans-serif;
         }
     }
 }
 
+
+// MOVIE POSTER AND INFO STYLING
 .cardTextContainer {
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     justify-content: center;
+    margin-bottom: 5%;
     width:100%;
     flex-wrap:wrap;
     
@@ -41,10 +53,6 @@ main {
     margin:0;
 }
 
-.videoTextContainer{
-    display:flex;
-    margin-top:5%;
-}
 
 .movieHeaderContainer{
     display:flex;
@@ -73,12 +81,62 @@ main {
             text-align:center;
             border-radius: 5px;
         }
+        .movieTitle {
+            font-size: 2rem;
+            text-decoration: underline;
+        }
         .addMovieToList{
             background-color:#65e465;
-            border:none;
+            border: none;
             border-radius:5px;
             padding: 10px 15px;
             color:$primaryWhite;
+        }
+        .addMovieToList:hover,
+        .addMovieToList:focus {
+            background-color:#65e465d2;
+        cursor: pointer;
+        }
+    }
+}
+
+// VIDEO OF WOWS AND RATINGS STYLING
+
+.videoTextContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top:5%;
+    margin-bottom: 30px;
+    gap: 45px;
+    video {
+        box-shadow: -16px 13px 6px 0px $primaryBlack;
+    }
+    .singleCardContainer {
+        background-color: $primaryYellow;
+        border-radius: 5px;
+        width: 30%;
+        text-align: center;
+        justify-content: center;
+        padding:20px;
+        line-height: 30px;
+        
+        p {
+            border-radius: 5px;
+            background-color:rgb(248, 235, 174);
+        }
+
+        .replayButton {
+            background-color:#65e465;
+            border: none;
+            border-radius:5px;
+            padding: 10px 15px;
+            color:$primaryWhite;
+        }
+        .replayButton:hover,
+        .replayButton:focus {
+            background-color:#65e465d2;
+        cursor: pointer;
         }
     }
 }

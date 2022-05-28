@@ -1,18 +1,9 @@
-// .backgroundImg {
-//     background-image: url("../assets/heroBanner.jpg");
-//     height: 40vh;
-//     width: 100%;
-//     background-position: center center;
-//     background-repeat: no-repeat;
-// }
-
-.lokiBanner {
-    background-image: url("../assets/lokiBanner.jpg");
-    height: 60vh;
+.heroBanner {
+    background-image: url("../assets/topHeroBanner.jpg");
+    height: 500px;
     width: 100vw;
-    // background-size: cover;
-    // background-position: center;
     background-repeat: no-repeat;
+    background-position: center bottom;
 }
 
 header {
@@ -33,15 +24,18 @@ header {
         flex-direction: row;
         justify-content: center;
         align-items: center;
+        gap: 30px;
         h1{
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-size: 4.5rem;
-            color: black;
+            font-family: 'Lobster', cursive;
+            font-family: 'Lora', serif;
+            font-family: 'Satisfy', cursive;
+            font-size: 5.4rem;
+            color: $primaryBlack;
         }
     }
     .mouthImgContainer {
-        height: 230px;
-        width: 230px;
+        height: 180px;
+        width: 160px;
     }
 }
 
@@ -63,6 +57,8 @@ header {
     p {
         font-size: 1.4rem;
         color: black;
+        font-family: 'Roboto', sans-serif;
+        font-style: italic;
     }
 
     ul {
@@ -104,9 +100,9 @@ header {
     position: fixed;
     right: 20px;
     top: 60px;
-    // -webkit-box-shadow: -5px -5px 5px 0px rgba(163,163,145,1);
-    // -moz-box-shadow: -5px -5px 5px 0px rgba(163,163,145,1);
-    box-shadow:5px -5px 5px 0px rgb(163, 163, 145)
+    -webkit-box-shadow: -5px -5px 5px 0px rgba(163,163,145,1);
+    -moz-box-shadow: -5px -5px 5px 0px rgba(163,163,145,1);
+    box-shadow: -5px -5px 5px 0px rgba(163,163,145,1);
 }
 .watchListButton:hover,
 .watchListButton:focus {

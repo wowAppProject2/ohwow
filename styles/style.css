@@ -276,11 +276,20 @@ video {
   height: auto;
 }
 
-.lokiBanner {
-  background-image: url("../assets/lokiBanner.jpg");
-  height: 60vh;
+p {
+  font-family: "Lobster", cursive;
+  font-family: "Lora", serif;
+  font-family: "Roboto", sans-serif;
+  color: #383838;
+  font-weight: 500;
+}
+
+.heroBanner {
+  background-image: url("../assets/topHeroBanner.jpg");
+  height: 500px;
   width: 100vw;
   background-repeat: no-repeat;
+  background-position: center bottom;
 }
 
 header .blackBar {
@@ -309,15 +318,18 @@ header .titleContainer {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  gap: 30px;
 }
 header .titleContainer h1 {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 4.5rem;
-  color: black;
+  font-family: "Lobster", cursive;
+  font-family: "Lora", serif;
+  font-family: "Satisfy", cursive;
+  font-size: 5.4rem;
+  color: #383838;
 }
 header .mouthImgContainer {
-  height: 230px;
-  width: 230px;
+  height: 180px;
+  width: 160px;
 }
 
 .myWatchList {
@@ -345,6 +357,8 @@ header .mouthImgContainer {
 .myWatchList p {
   font-size: 1.4rem;
   color: black;
+  font-family: "Roboto", sans-serif;
+  font-style: italic;
 }
 .myWatchList ul {
   list-style: none;
@@ -382,8 +396,8 @@ header .mouthImgContainer {
   position: fixed;
   right: 20px;
   top: 60px;
-  -webkit-box-shadow: 5px -5px 5px 0px rgb(163, 163, 145);
-          box-shadow: 5px -5px 5px 0px rgb(163, 163, 145);
+  -webkit-box-shadow: -5px -5px 5px 0px rgb(163, 163, 145);
+  box-shadow: -5px -5px 5px 0px rgb(163, 163, 145);
 }
 
 .watchListButton:hover,
@@ -393,7 +407,7 @@ header .mouthImgContainer {
 }
 
 main {
-  min-height: 100vh;
+  min-height: 50vh;
 }
 main .movieDropdownContainer {
   position: realtive;
@@ -412,6 +426,13 @@ main .movieDropdownContainer {
           justify-content: center;
   gap: 250px;
 }
+main .movieDropdownContainer h2 {
+  font-family: "Lobster", cursive;
+  font-family: "Lora", serif;
+  font-family: "Satisfy", cursive;
+  font-size: 2rem;
+  color: #383838;
+}
 main .movieDropdownContainer select {
   padding: 5px;
   background-color: #383838;
@@ -427,6 +448,7 @@ main .movieDropdownContainer .messageAlert {
   top: 339px;
   color: white;
   border-radius: 5px;
+  font-family: "Roboto", sans-serif;
 }
 
 .cardTextContainer {
@@ -434,12 +456,13 @@ main .movieDropdownContainer .messageAlert {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: vertical;
-  -webkit-box-direction: reverse;
-      -ms-flex-direction: column-reverse;
-          flex-direction: column-reverse;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  margin-bottom: 5%;
   width: 100%;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
@@ -455,13 +478,6 @@ main .movieDropdownContainer .messageAlert {
       -ms-flex-direction: column;
           flex-direction: column;
   margin: 0;
-}
-
-.videoTextContainer {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  margin-top: 5%;
 }
 
 .movieHeaderContainer {
@@ -507,6 +523,10 @@ main .movieDropdownContainer .messageAlert {
   text-align: center;
   border-radius: 5px;
 }
+.movieHeaderContainer .movieTextContainer .movieTitle {
+  font-size: 2rem;
+  text-decoration: underline;
+}
 .movieHeaderContainer .movieTextContainer .addMovieToList {
   background-color: #65e465;
   border: none;
@@ -514,10 +534,72 @@ main .movieDropdownContainer .messageAlert {
   padding: 10px 15px;
   color: white;
 }
+.movieHeaderContainer .movieTextContainer .addMovieToList:hover,
+.movieHeaderContainer .movieTextContainer .addMovieToList:focus {
+  background-color: rgba(101, 228, 101, 0.8235294118);
+  cursor: pointer;
+}
 
-footer .blackBar {
+.videoTextContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: 5%;
+  margin-bottom: 30px;
+  gap: 45px;
+}
+.videoTextContainer video {
+  -webkit-box-shadow: -16px 13px 6px 0px #383838;
+          box-shadow: -16px 13px 6px 0px #383838;
+}
+.videoTextContainer .singleCardContainer {
+  background-color: rgb(234, 213, 117);
+  border-radius: 5px;
+  width: 30%;
+  text-align: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 20px;
+  line-height: 30px;
+}
+.videoTextContainer .singleCardContainer p {
+  border-radius: 5px;
+  background-color: rgb(248, 235, 174);
+}
+.videoTextContainer .singleCardContainer .replayButton {
+  background-color: #65e465;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  color: white;
+}
+.videoTextContainer .singleCardContainer .replayButton:hover,
+.videoTextContainer .singleCardContainer .replayButton:focus {
+  background-color: rgba(101, 228, 101, 0.8235294118);
+  cursor: pointer;
+}
+
+footer .blackBarFooter {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   background-color: #383838;
   width: 100%;
+  height: 32px;
   text-align: center;
 }
 footer .lokiBanner {
@@ -527,10 +609,10 @@ footer .lokiBanner {
   background-repeat: no-repeat;
   background-position: center bottom;
 }
-footer p {
+footer a {
   margin: 0;
   letter-spacing: 1px;
   color: white;
-  padding: 10px 0;
+  text-decoration: none;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }

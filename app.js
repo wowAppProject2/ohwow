@@ -28,10 +28,8 @@ wowApp.hoverSound = () => {
     mouthImg.addEventListener('click', (audioElement)=> {
         audio.play();
 
-        mouthImg.style.width= "260px";
-        mouthImg.style.transition= "width 0.6s ease-in";
-        mouthImg.style.width= "250px";
-        mouthImg.style.transition= "width 0.6s ease-in";
+        mouthImg.style.width= "180px";
+        mouthImg.style.transition= "width 1s ease-in-out";
     })
 }
 
@@ -143,6 +141,7 @@ wowApp.getWows = movieWow=>{
 //A function declaration to create card elements populate the list
 wowApp.createCard =(wowData)=> {
 
+
     // Create div to hold video and text content 
     const videoAndTextContainer=document.createElement('div');
     // Add a class to the container holding the video and text content
@@ -157,19 +156,24 @@ wowApp.createCard =(wowData)=> {
     // NOTE: RENAME CONTAINER
     wowApp.wowText=document.querySelector('.cardTextContainer');
 
-    // Create wow#, timestamp and full quote elements
+    // Create wow#, timestamp, full quote elements and replay button
     const wowNumber = document.createElement('p');
     const timeStamp= document.createElement('p');
     const wowQuote = document.createElement ('p');
-
-    // Add a class to the paragraph holding the full quote
+    const replayButtonEl = document.createElement('button');
+    
+    
+    // Add a class to the paragraph holding the full quote and replay button
     wowQuote.classList.add("fullQuote");
-
+    replayButtonEl.classList.add('replayButton');
+    
+    
     // Set the text content of each element to their respective properties in the object
     wowNumber.textContent=`Wow # : ${wowData[0].current_wow_in_movie}`;
     timeStamp.textContent=`Time : ${wowData[0].timestamp}`;
-    wowQuote.textContent=`"${wowData[0].full_line}"`;
-
+    wowQuote.innerHTML=`Full Line: <br>"${wowData[0].full_line}"`;
+    replayButtonEl.textContent = "Replay Wow";
+    
     //Find the video source URL and save to a varibale 
     const videoSource = wowData[0].video["1080p"];
      
@@ -185,20 +189,34 @@ wowApp.createCard =(wowData)=> {
           
     //Append working source to video
     wowApp.generatedVideo.append(wowApp.generateSource);
-  
-    //Append the text to the singleCardContainer
-    singleCardContainer.append(wowNumber, timeStamp, wowQuote);
 
+
+    //Append the text to the singleCardContainer
+    singleCardContainer.append(wowNumber, timeStamp, wowQuote, replayButtonEl);
+    
     // Append the video and singleTextContainer to the videoAndTextContainer
     videoAndTextContainer.append(wowApp.generatedVideo,singleCardContainer);
-
+    
     // Append the videoAndTextContainer to the MAIN CONTAINER (update name when class is changed)
     wowApp.wowText.append(videoAndTextContainer);
+    const replayButton = document.querySelector('.replayButton');
 
+    
     //Running function to populate poster, rating, title, and description
     wowApp.getRating(wowApp.userChoice);
-
+    
+    wowApp.replayMovie();
+    
 }
+
+    // Click event to replay the wow video
+    wowApp.replayMovie = () => {
+        const replayButton = document.querySelector('.replayButton');
+        replayButton.addEventListener('click', function (){
+            const video = document.querySelector('video');
+            video.play();
+        })
+    }
 
 //Pass movie choice to constructor, constructor finds the movie object
 wowApp.getRating = (movieChoice) => {
@@ -240,6 +258,8 @@ const removeMovieHeader=document.querySelector('.movieHeaderContainer');
 // Once a new movie selected =, remove movie poster and text from previous choice
 if(removeMovieHeader!==null){
     removeMovieHeader.remove();
+    const removeVideoTextContainer = document.querySelector('.videoTextContainer');
+    removeVideoTextContainer.remove();
 }
 
 //Create div to hold movie poster
@@ -256,6 +276,7 @@ let movieDescription = document.createElement('p');
 let movieRating = document.createElement('p');
 wowApp.watchListButton = document.createElement('button');
 wowApp.watchListButton.classList.add('addMovieToList');
+movieTitle.classList.add('movieTitle');
 
 // Set elements to respective object properties
 
