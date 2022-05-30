@@ -12,13 +12,11 @@
     <title>Oh Wow...</title>
 </head>
 <body>
-
     <!-- Anchor tag to skip to main content-->
     <a href="#main" class="skip-link">Skip to main content.</a>
 
 <header>
-    <section>
-        
+
         <div class="blackBar">
             <p>Thanks to the Owen Wilson API for making this dream possible.</p>
         </div>
@@ -32,10 +30,13 @@
                 </div>
 
                 <h1>Oh Wow...</h1>
+
             </div>
 
             <!-- Thius button will open the user's watch list -->
             <button class="watchListButton">Watch List</button>
+
+            <!-- Hidden watch list -->
             <div class ="myWatchList">
                 <p>My watch list</p>
                 
@@ -44,49 +45,56 @@
                 </ul>
 
             </div>
-        </div>
-    </section>
-    <div class="heroBanner"></div>
+
+        </div> <!--Close wrapper-->
+
+    
+    <div class="heroBanner">
+        <!-- Hero banner displayedhere -->
+    </div>
+
 </header>
     
     
-<main>
+<main id="main">
     <section>
         <div class="wrapper">
             <div class="movieDropdownContainer">
-            <h2>Prepare to be Wowwed...</h2>
+                <h2>Prepare to be Wowwed...</h2>
 
-            <form id="myForm">
+                <form id="myForm">
 
-                <label for="moviesDropDown"></label>
-                <select id="moviesDropDown">
-                    <option id="firstOption" selected hidden>Choose a movie</option>
-                </select>
+                    <label for="moviesDropDown"></label>
+                    <select id="moviesDropDown">
+                        <option id="firstOption" selected hidden>Choose a movie</option>
+                    </select>
             
-            </form>
-        </div>
+                </form>
+            </div>
         </div>
     </section>
 
-    <!-- //PLACEHOLDER CARD -->
+ 
     <section>
         <div class="wrapper">
             <div class="cardTextContainer">
-                <!-- Dynamic content here -->
+                <!-- Dynamic content here: video, movie poster and movie desciptions -->
                 <h3>Pick a movie from the dropdown</h3>
             </div>
     </section>
 </main>
 
-    <footer>
-        <div class="lokiBanner"></div>
+<footer>
+    <div class="lokiBanner">
+        <!-- Footer banner displayed here -->
+    </div>
         
         <div class="blackBarFooter">
             <a href="https://junocollege.com/">Juno College 2022</a>
         </div> 
     </footer>
 
-
+    <!-- Link external javascript file-->
     <script src=app.js></script>
 </body>
 </html>

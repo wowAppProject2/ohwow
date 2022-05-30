@@ -11,7 +11,7 @@ wowApp.init = () => {
     // call a method that will populate dropwon Menu
     wowApp.populateDropDown();
     // call a method that will add an event listener to our form element
-    wowApp.movieClick();
+    wowApp.getMovie();
     // Add event listener to watch list
     wowApp.toggleMovieList();
     // QuerySelect the form element
@@ -20,20 +20,23 @@ wowApp.init = () => {
     wowApp.hoverSound();
 }
 
+// Define hoverSound method
 wowApp.hoverSound = () => {
+    // Save sound to be played to audio variable
     const audio = new Audio("./assets/wowHoverSound.mp3")
     const audioElement = document.querySelector('audio');
     const mouthImg = document.querySelector('.mouthImgContainer');
 
+    // Attach event listener to the image
+    // On click, audio will play and iumage width will transition
     mouthImg.addEventListener('click', (audioElement) => {
         audio.play();
-
         mouthImg.style.width = "180px";
         mouthImg.style.transition = "width 1s ease-in-out";
     })
 }
 
-// Open and close the wish list menu
+// toggleMovieList method, which will oprn and close the wish list menu
 wowApp.toggleMovieList = () => {
 
     let toggleListStatus = true;
@@ -57,14 +60,10 @@ wowApp.toggleMovieList = () => {
             myWatchList.style.transition = ".3s ease-in";
             toggleListStatus = false;
         }
-
     })
-
-
 }
 
-// Method that populates the dropdown menu with API call
-
+// Method that populates the dropdown menu with API call to the Owen Wilson Wow API
 wowApp.populateDropDown = () => {
     fetch("https://owen-wilson-wow-api.herokuapp.com/wows/movies")
         .then((response) => {
@@ -76,7 +75,6 @@ wowApp.populateDropDown = () => {
                 throw new Error('Wow there is nothing here');
             }
         })
-
         .then((wowData) => {
             // Populate dropdown menu using array returned from API call
             // select the select element
@@ -92,17 +90,16 @@ wowApp.populateDropDown = () => {
             })
 
         })
-
         .catch((error) => {
             // Alert user with error message if data does not exist
             alert(error);
         })
-
 }
 
-wowApp.movieClick = () => {
+// define movieClick method 
+wowApp.getMovie = () => {
 
-    // Add an event listner to the form element
+    // Add an event listener to the form element
     wowApp.formSelect = addEventListener('change', (e) => {
 
         // Select h3 message and remove from HTML
@@ -116,12 +113,10 @@ wowApp.movieClick = () => {
 
         // Call the getWows function, passing the wowApp.userChoice property as an argument
         wowApp.getWows(wowApp.userChoice);
-
     })
-
 }
 
-// Function declaration for getWows method, that takes the wowApp.userChoice as a paramter
+// Define getWows method that takes the wowApp.userChoice as a paramter and returns video/text properties from a fetch made to the Owen Wilson Wow API
 wowApp.getWows = movieWow => {
     fetch(`https://owen-wilson-wow-api.herokuapp.com/wows/random?movie=${movieWow}`)
         .then((response) => {
@@ -136,6 +131,7 @@ wowApp.getWows = movieWow => {
 
         .then((wowData) => {
             wowApp.moviePosterFromOwenApi = wowData[0].poster;
+            // Call the createCard method;pass wowData as argumnet
             wowApp.createCard(wowData);
         })
         .catch((error) => {
@@ -144,9 +140,8 @@ wowApp.getWows = movieWow => {
         })
 }
 
-//A function declaration to create card elements populate the list
+//Define the creatCard method that will populate the HTML with a video and information for the video displayed, which will take the object returned from the API call as a paramter
 wowApp.createCard = (wowData) => {
-
 
     // Create div to hold video and text content 
     const videoAndTextContainer = document.createElement('div');
@@ -168,11 +163,9 @@ wowApp.createCard = (wowData) => {
     const wowQuote = document.createElement('p');
     const replayButtonEl = document.createElement('button');
 
-
     // Add a class to the paragraph holding the full quote and replay button
     wowQuote.classList.add("fullQuote");
     replayButtonEl.classList.add('replayButton');
-
 
     // Set the text content of each element to their respective properties in the object
     wowNumber.textContent = `Wow # : ${wowData[0].current_wow_in_movie}`;
@@ -196,7 +189,6 @@ wowApp.createCard = (wowData) => {
     //Append working source to video
     wowApp.generatedVideo.append(wowApp.generateSource);
 
-
     //Append the text to the singleCardContainer
     singleCardContainer.append(wowNumber, timeStamp, wowQuote, replayButtonEl);
 
@@ -206,56 +198,55 @@ wowApp.createCard = (wowData) => {
     // Append the videoAndTextContainer to the MAIN CONTAINER (update name when class is changed)
     wowApp.wowText.append(videoAndTextContainer);
 
-    //Running function to populate poster, rating, title, and description
+    //Call the method to populate poster, rating, title, and description
     wowApp.getRating(wowApp.userChoice);
 
+    // Define a methoid that will replay the video appended to the HTML
     wowApp.replayVideo = () => {
         let video = document.querySelector('video');
         video.play();
     }
 
+    // Event listener which will trigger the video to be replayed
     replayButtonEl.addEventListener('click', wowApp.replayVideo)
 
+    // Call the replayVideo method
     wowApp.replayVideo();
 
 }
 
-
-//Pass movie choice to constructor, constructor finds the movie object
+//Define getRating method which takes the users movie choice as a paramter and makes an API call to the movieD
 wowApp.getRating = (movieChoice) => {
+    //Pass movie choice and name spaced movieDB endpoint to constructor to build new URL
     const urlObject = new URL(wowApp.endPoint)
-
     urlObject.search = new URLSearchParams({
         api_key: wowApp.apiKey,
         query: movieChoice
     });
-
+    // Make fetch call to movieDB API
     fetch(urlObject)
         .then((response) => {
-            console.log(response);
+          
             return response.json();
         })
         .then((jsonData) => {
-            console.log(jsonData);
-
-            //Filter array by movie title to find the right title get back movie
-
+            //Filter array by movie title to return the user's movie choice
             wowApp.movieReturned = jsonData.results.filter(function (title) {
                 return title.title == movieChoice
             });
+            // Call movieHeader method that will append object returned from API call
             wowApp.movieHeader();
         });
 }
 
-
-// Use array # to pull title, poster, rating, and description
-
+// Define movieHeader method that will create an image (movie poster) and movie information and appened to the HTML
 wowApp.movieHeader = () => {
 
     // Create main container to hold all movie info
     const movieHeaderContainer = document.createElement('div');
     movieHeaderContainer.classList.add('movieHeaderContainer');
 
+    // Select the movieHeaderContainer which will be used to remove it once a new choice is made
     const removeMovieHeader = document.querySelector('.movieHeaderContainer');
 
     // Once a new movie selected =, remove movie poster and text from previous choice
@@ -273,7 +264,7 @@ wowApp.movieHeader = () => {
     const movieTextContainer = document.createElement('div');
     movieTextContainer.classList.add('movieTextContainer');
 
-    // Create lements for movie description, title and rating
+    // Create elements for movie description, title, rating and add to watch list button
     let movieTitle = document.createElement('p');
     let movieDescription = document.createElement('p');
     let movieRating = document.createElement('p');
@@ -282,7 +273,6 @@ wowApp.movieHeader = () => {
     movieTitle.classList.add('movieTitle');
 
     // Set elements to respective object properties
-
     movieTitle.textContent = wowApp.movieReturned[0].title;
     movieDescription.textContent = wowApp.movieReturned[0].overview;
     movieRating.textContent = `${wowApp.movieReturned[0].vote_average} / 10`;
@@ -295,17 +285,17 @@ wowApp.movieHeader = () => {
     // Append moviePosterContainer and movieTextHeaderContainer to movieHeaderContainer
     movieHeaderContainer.append(movieTextContainer);
 
-
     //Add poster img to moviePosterContainer
     const moviePoster = document.createElement('img');
 
-
+    // Set the image src and alt attributes
     moviePoster.src = wowApp.moviePosterFromOwenApi;
     moviePoster.alt = `Poster of ${wowApp.movieReturned[0].title}`;
 
     moviePoster.setAttribute('src', moviePoster.src);
     moviePoster.setAttribute('alt', moviePoster.alt);
 
+    // Append elements to the HTML
     movieHeaderContainer.append(moviePosterContainer);
     moviePosterContainer.append(moviePoster);
     wowApp.wowText.append(movieHeaderContainer);
@@ -313,68 +303,39 @@ wowApp.movieHeader = () => {
     wowApp.addMovie();
 }
 
-// Adds movie poster and removal button to the watch list
+// Define addMovie method that will add an image to the user's watch list once a button is clicked
 wowApp.addMovie = () => {
 
     // Select the UL from myWatchList
     const myWatchList = document.querySelector('.myWatchList');
-    // Query select all the lists
-    wowApp.allLists = document.querySelectorAll('li');
-
+  
     // Add event listener to watch list button
     wowApp.watchListButton.addEventListener('click', () => {
-        // Query the lists again to ensure the movie on screemn can't be added a second time, before the user changes movie selection
+         // Query select all the lists
         wowApp.allLists = document.querySelectorAll('li');
 
-        // Convert allLists to an array
-        wowApp.allListsArr = Array.from(wowApp.allLists);
-
-        // // Check to see if any lists (movies have been added) to the watch list
-        // if(wowApp.allLists.length===0){
-        //     // If the list is empty, proceed with the following code:
-
-        //     // Create li and image and paragraph element 
-        //     //use randomNumber generator to generate id, save the id to variable
-        //     let randomNumber = Math.floor(Math.random() *10000)
-        //     wowApp.listItem = document.createElement('li');
-        //     wowApp.listItem.classList.add('listItem');
-        //     wowApp.listItem.setAttribute('id', randomNumber)
-
-        //     const posterImage = document.createElement('img');
-        //     wowApp.listRemoveButton = document.createElement('button');
-        //     wowApp.listRemoveButton.classList.add('removeMovieFromList');
-
-        //      // Set image attributes to poster path and title to button
-        //     posterImage.src = wowApp.moviePosterFromOwenApi;
-        //     posterImage.alt=`Poster of ${wowApp.userChoice}`;
-        //     wowApp.listRemoveButton.textContent = "Remove";
-
-        //     posterImage.setAttribute('src', posterImage.src);
-        //     posterImage.setAttribute('alt', posterImage.alt);
-
-        //      //Append image to li
-        //     wowApp.listItem.append(posterImage, wowApp.listRemoveButton);
-        //     myWatchList.append(wowApp.listItem);    
-
-        // }
-
-        // else{
-
+        // Use spread to create an array from the list item nodeList 
+        wowApp.allListsArr = [...wowApp.allLists];
+        
+        // Check if wish list is populated
         if (wowApp.allLists.length >= 0) {
-            // If the wish list is popuoated, check to see if the user's cureent selection mathes the lovies already in the watch list
+            
+            // Filter allListsArr and return if the image alt matches the uses's choice
             const checkMovies = wowApp.allListsArr.filter((item) => {
                 return item.firstChild.alt === `Poster of ${wowApp.userChoice}`;
             });
 
+            // The movie is not in the the list yet. Proceed with the foolowing code:
             if (checkMovies.length === 0) {
-                // The movie is not in the the list yet. Proceed with the foolowing code:
-
+              
+                // Generate a random number, create list item and create a class for the list item
                 let randomNumber = Math.floor(Math.random() * 100000)
                 wowApp.listItem = document.createElement('li');
                 wowApp.listItem.classList.add('listItem');
+                // Use the random mumber as the list items ID
                 wowApp.listItem.setAttribute('id', randomNumber)
 
-
+                // Create imagge and button elements
                 const posterImage = document.createElement('img');
                 wowApp.listRemoveButton = document.createElement('button');
                 wowApp.listRemoveButton.classList.add('removeMovieFromList');
@@ -391,8 +352,7 @@ wowApp.addMovie = () => {
                 wowApp.listItem.append(posterImage, wowApp.listRemoveButton);
                 myWatchList.append(wowApp.listItem);
 
-                // Display message when movie us Added:
-
+                // Display message when movie is Added:
                 wowApp.alertDiv = document.createElement('div');
                 // Add a id to the created div
                 wowApp.alertDiv.setAttribute('id', 'removeDiv');
@@ -405,16 +365,17 @@ wowApp.addMovie = () => {
                 // Append the created div to the dropdown div
                 wowApp.dropdownDiv.append(wowApp.alertDiv);
 
+                // Timer function to display then remove message to user
                 setTimeout(function () {
-                    theId = document.querySelector('#removeDiv');
-                    theId.remove();
+                    const divToRemove = document.querySelector('#removeDiv');
+                    divToRemove.remove();
                 }, 2000);
 
             }
 
             else {
+                // If filter returns an array with an item, movie already exists in user's watch list - alert user:
 
-                // Movie has already been added, alert the user:
                 wowApp.alertDiv = document.createElement('div');
                 // Add an id to the created div
                 wowApp.alertDiv.setAttribute('id', 'removeDiv');
@@ -427,29 +388,30 @@ wowApp.addMovie = () => {
                 // Append the created div to the dropdown div
                 wowApp.dropdownDiv.append(wowApp.alertDiv);
 
-                // // Set timeout function to display div and then remove it 
-                // setTimeout(function () {
-                //     theId = document.querySelector('#removeDiv');
-                //     theId.remove();
-                // }, 2000);
-
+                // Set timeout function to display div and then remove it 
+                setTimeout(function () {
+                    const divToRemove = document.querySelector('#removeDiv');
+                    divToRemove.remove();
+                }, 2000);
             }
-
         }
+        // Call method that will remove the movie from the user's wactch list
         wowApp.removeMovie();
     })
 }
 
-// Removes a movie from watch list when its button is clicked
+// Define removeMovie method that will remove a movie from watch list on button click
 wowApp.removeMovie = () => {
 
     // Query for all generated buttons
     wowApp.removeMovieButton = document.querySelectorAll('.removeMovieFromList');
 
-    // For each button open its node list too target the ID
+    // For each button, add an event listener
     wowApp.removeMovieButton.forEach(item => {
         item.addEventListener('click', function (e) {
+            // Using the event object, find the value of the ID for it's parent node - the list item
             const parentID = e.target.parentNode.id
+            //Select the list associated with that ID
             wowApp.deleteListItem = document.getElementById(parentID);
 
             // As long as the list isn't empty delete the list item
