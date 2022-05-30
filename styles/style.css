@@ -342,30 +342,32 @@ header .mouthImgContainer {
           flex-direction: row;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  position: absolute;
+  position: fixed;
   top: 60px;
   left: 0;
   background-color: rgb(255, 255, 255);
   height: 0;
   width: 0;
-  overflow: hidden;
+  overflow: scroll;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
   text-decoration: underline;
+  max-height: 90vh;
 }
 .myWatchList p {
   font-size: 1.4rem;
   color: black;
   font-family: "Roboto", sans-serif;
   font-style: italic;
+  text-align: center;
 }
 .myWatchList ul {
   list-style: none;
 }
 .myWatchList li {
   list-style: none;
-  width: 100%;
+  width: 80%;
   padding: 15px;
 }
 .myWatchList button {
