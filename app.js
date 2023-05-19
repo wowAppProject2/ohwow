@@ -65,7 +65,7 @@ wowApp.toggleMovieList = () => {
 
 // Method that populates the dropdown menu with API call to the Owen Wilson Wow API
 wowApp.populateDropDown = () => {
-    fetch("https://owen-wilson-wow-api.herokuapp.com/wows/movies")
+    fetch("https://owen-wilson-wow-api.onrender.com/wows/movies")
         .then((response) => {
             if (response.ok) {
                 return response.json()
@@ -118,7 +118,7 @@ wowApp.getMovie = () => {
 
 // Define getWows method that takes the wowApp.userChoice as a paramter and returns video/text properties from a fetch made to the Owen Wilson Wow API
 wowApp.getWows = movieWow => {
-    fetch(`https://owen-wilson-wow-api.herokuapp.com/wows/random?movie=${movieWow}`)
+    fetch(`https://owen-wilson-wow-api.onrender.com/wows/random?movie=${movieWow}`)
         .then((response) => {
             if (response.ok) {
                 return response.json()

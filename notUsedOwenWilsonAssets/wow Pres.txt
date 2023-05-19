@@ -1,0 +1,48 @@
+---NICK--- 
+Test audio
+Hey everyone
+My partner is Joe and our app is named Oh Wow
+
+choose a Owen Wilson movie from the drop down
+generate a random Wow clip
+and info about it. 
+
+We needed to pull from 2 APIs to make this work. 
+1st MovieDB
+2nd Owen Wilson Wow Api
+
+
+OVERVIEW = Describe site top to bottom
+
+//CLICK A MOVIE
+Zoolander
+
+
+
+---JOE---
+
+Describe the wow video card and the replay button
+Describe the poster card and the add to watch list button
+Ask Nick to open the list
+
+
+
+NICK -- WIN
+
+We did paried programming the whole time. 
+Paired programming made a lot more sense on a large project
+
+We hit every stech goal and more
+Original goal was to populate a random wow from a movie of choice with a working video clip which is a element we havent 
+worked with before
+
+Now we have a poster, description, rating, replay button, a scrolling watch list where items 
+can be added or remove, notifications if the addition or removal was successful, and even this thing up here (click wowFace)
+
+JOE -- CHALLENGES
+
+
+Finding a working api with documentation we are comfortable with
+We went into the project backwards where we had an idea for an app first then went looking for the right APIs
+
+            

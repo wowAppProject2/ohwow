@@ -1,0 +1,20 @@
+TO DO
+
+Border on Watch List button
+
+Watch list very large
+
+1 more pass on Oh Wow and mouthImg media querys
+
+If bug is fixed in repeat movies disable controls
+
+Change Wow # to Wow number ${wow} in the movie
+
+add character limit to Full Line
+
+
+ARROW KEYS ON THE DROP DOWN 
+
+BONUS :Cars is bringing up other movies posters
+
+
